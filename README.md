@@ -186,6 +186,7 @@ export class DemoResolver implements Resolve<any> {
 
     }
 }
+```
 
 You can also redirect to an error page if the user does not have the permission to visualize:
 
