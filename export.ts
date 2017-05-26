@@ -1,0 +1,1 @@
+export { PermissionService } from './src/app/permission/permission.service';
