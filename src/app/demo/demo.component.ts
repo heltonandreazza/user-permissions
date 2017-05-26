@@ -12,6 +12,8 @@ export class DemoComponent implements OnInit {
 
   ngOnInit() {
     //getting permission from route resolver
-    this.route.data.subscribe(({ userPermissions } = {}) => this.userPermissions = userPermissions);
+    this.route.data.subscribe(({ userPermissions } = {}) => {
+      this.userPermissions = userPermissions
+    });
   }
 }

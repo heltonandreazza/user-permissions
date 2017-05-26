@@ -168,23 +168,28 @@ export class AppRoutingModule {
 }
 ```
 
-And finally, in the component: 
+And finally, in the component you can get the permissions from the route resolver: 
 
 app/demo/demo.component.ts
 ```
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
-import { PermissionService } from '../permission/permission.service';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
-@Injectable()
-export class DemoResolver implements Resolve<any> {
-    constructor(private permissionService: PermissionService) { }
+@Component({
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styleUrls: ['./demo.component.css']
+})
+export class DemoComponent implements OnInit {
+  userPermissions = {};
+  constructor(private route: ActivatedRoute) { }
 
-    resolve(route: ActivatedRouteSnapshot) {
-        return this.permissionService.getPermissionTo(["Visualizar", "VisualizarSatisfacaoPorPulso"], { resource: "panel" });
-
-    }
+  ngOnInit() {
+    //getting permission from route resolver
+    this.route.data.subscribe(({ userPermissions } = {}) => {
+      this.userPermissions = userPermissions
+    });
+  }
 }
 ```
 
@@ -202,4 +207,4 @@ TODO
 
 ## Credits
 
-Project base on http://git.senior.com.br/design/ux-components
+Project based on http://git.senior.com.br/design/ux-components
